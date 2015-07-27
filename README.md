@@ -24,7 +24,7 @@ https://drive.google.com/folderview?id=0BxTarWOIystqflByWkkzSy1VQTNUS2xpT2JsUWlx
 * We do project management on Taiga.io. You can see our current project status and to-do list here:
  https://tree.taiga.io/project/jcdjulian-studiocracy/
 * To become a member on our team on Taiga and receive assignments, make a Taiga account and email julian.deocampo@gmail.com for an invitation
-* In the Kanban section you can see our project board. Tasks in the first column, "Ready" are available for anyone to assign to themselves and work on. When you work on a task, move it to the "In Progress" board. When you've made your pull request, send it to the "Ready for Test" board. If we approve your change, it'll be moved to "Done". Otherwise, we'll work with you on your revision and return it to "In progress".
+* In Taiga, click "Backlog" to see our current status. Identify which Sprint we're in and click on it to be taken to that iteration's sprint taskboard. Anything under "Open" that is unassigned is up for grabs!
 * Issue tracking is handled on Taiga, not Github! Check the Issues section.
 * Under backlog, you can view a burndown chart of our tasks this sprint and how close we're getting to the latest release.
 * Communication in handled through the studiocracy-public Slack chat. Contact julian.deocampo@gmail.com for Slack access or for troubleshooting
