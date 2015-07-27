@@ -72,9 +72,16 @@ group :production do
   gem 'pg'
 end
 
+# 
+
 # Unicorn: http://unicorn.bogomips.org
 group :production do
   gem 'unicorn'
+end
+
+# Puma:
+group :production do
+  gem 'puma'
 end
 
 #Paperclip - for multimedia uploads, esp. images
