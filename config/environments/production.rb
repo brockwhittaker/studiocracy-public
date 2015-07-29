@@ -2,7 +2,6 @@ Studiocracy::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   
   # CONFIGURING ASSET PIPELINE
-  config.serve_static_assets = true
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
   config.assets.compile = true
   
@@ -25,7 +24,7 @@ Studiocracy::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_files = false
+  config.serve_static_files = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = Uglifier.new(mangle: false)
