@@ -1,7 +1,5 @@
 # Generated with RailsBricks
 # Initial seed file to use with Devise User Model
-require "open-uri"
-
 print "---------- Generating Seed Data ----------"
 # Temporary admin account
 u = User.new(
@@ -39,9 +37,7 @@ u.save!
 			weight_in_pounds: rand(22),
 			price: (rand(1000000)) * (0.01),
 			quantity: rand(33),
-			image: File.open('pie.png', 'wb') do |fo|
-			  fo.write open("http://i.imgur.com/27ttOx6.png").read
-			end
+			image: File.new('app/assets/images/test.png')
     )
 		p.save!
 		print i, "..."
