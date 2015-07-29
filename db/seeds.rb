@@ -37,7 +37,7 @@ u.save!
 			weight_in_pounds: rand(22),
 			price: (rand(1000000)) * (0.01),
 			quantity: rand(33),
-			image: File.new('app/assets/images/test.png')
+			image: open(http://i.imgur.com/27ttOx6.png)
     )
 		p.save!
 		print i, "..."
