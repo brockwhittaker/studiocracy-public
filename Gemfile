@@ -63,9 +63,7 @@ gem 'devise', '3.4.1'
 gem 'redcarpet', '3.2.2'
 
 # Rails 12factor for Heroku: https://github.com/heroku/rails_12factor
-group :production do
-  gem 'rails_12factor'
-end
+gem 'rails_12factor', group: :production
 
 # PostgreSQL gem for Heroku
 group :production do
