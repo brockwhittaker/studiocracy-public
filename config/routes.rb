@@ -34,6 +34,16 @@ Studiocracy::Application.routes.draw do
   get "/our_team", to: "pages#our_team", as: "our_team"
   post "/emailconfirmation", to: "pages#email", as: "email_confirmation"
 
+  # Studiocracy API
+  namespace :api do
+    namespace :posts do
+      resources :posts
+    end
+    namespace :users do
+      resources :users
+    end
+  end
+
   namespace :admin do
     resources :posts
     root "base#index"

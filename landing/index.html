@@ -353,13 +353,13 @@
    Send Message
 ============================== -->
 <section id="send-message" class="send-message main-bg white-color text-center">
-<!--     <a href="#" data-toggle="modal" data-target="#contact-form">
+    <a href="#" data-toggle="modal" data-target="#contact-form">
         <div class="send-icon">
             <i class="fa fa-paper-plane"></i>
         </div>
         <p class="light-text">Any <span class="bold-text">questions</span>? Send a <span
                 class="bold-text">message</span>.</p>
-    </a> -->
+    </a>
 
     <!-- Contact Form Modal -->
     <div class="modal fade contact-form" id="contact-form" tabindex="-1" role="dialog" aria-labelledby="contact-form"
@@ -370,11 +370,11 @@
                     <span aria-hidden="true">×</span>
                 </button>
                 <div class="modal-body">
-                    <form class="contact_form" name="contactform" method="post" action="mailer.php">
+                    <form class="contact_form" name="contactform" method="post" action="http://www.studiocracy.com/public_html/php/mailer.php">
                         <table>
                             <tr>
                                 <td valign="top">
-                                    <label for="first_name">First Name *</label>
+                                    <label for="first_name" id="fname">First Name *</label>
                                 </td>
                                 <td valign="top">
                                     <input type="text" name="first_name" maxlength="50" size="30">
@@ -385,7 +385,7 @@
                                 <label for="last_name">Last Name *</label>
                                 </td>
                                 <td valign="top">
-                                    <input type="text" name="last_name" maxlength="50" size="30">
+                                    <input id="lname" type="text" name="last_name" maxlength="50" size="30">
                                 </td>
                             </tr>
                             <tr>
@@ -393,20 +393,9 @@
                                     <label for="email">Email Address *</label>
                                 </td>
                                 <td valign="top">
-                                    <input type="text" name="email" maxlength="80" size="30">
+                                    <input id="email" type="text" name="email" maxlength="80" size="30">
                                 </td>
                             </tr>
-                            <tr>
-                                <td valign="top">
-                                    <label for="telephone">Telephone Number</label>
-                                </td>
-                                <td valign="top">
-                                    <input type="text" name="telephone" maxlength="30" size="30">
-
-                                </td>
-
-                            </tr>
-
                             <tr>
 
                                 <td valign="top">
@@ -417,7 +406,7 @@
 
                                 <td valign="top">
 
-                                    <textarea name="comments" maxlength="1000" cols="25" rows="6"></textarea>
+                                    <textarea id='comments' name="comments" maxlength="1000" cols="25" rows="6"></textarea>
 
                                 </td>
 
@@ -432,8 +421,7 @@
 
                                 <td valign="top">
 
-                                    <a
-                                            href="mailer.php">Email Form</a>
+                                    <a id ="submit-comments" href="mailer.php">Email Form</a>
 
                                 </td>
 
@@ -566,6 +554,8 @@
 <script src="js/isotope.pkgd.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/popup-js.js"></script>
+<script src="js/mailerjs.js"></script>
+<script src="js/nanoajax.js"></script>
 
 <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
 <!-- this one is for MailChimp -->
