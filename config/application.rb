@@ -29,6 +29,8 @@ module Studiocracy
     # autoload lib path
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
-
+  
+    # asset pipeline
+    config.serve_static_files = true
   end
 end

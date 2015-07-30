@@ -214,6 +214,7 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     pg (0.18.1)
+    puma (2.12.2)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -348,6 +349,7 @@ DEPENDENCIES
   omniauth-stripe-connect
   paperclip (~> 4.2)
   pg
+  puma
   rails (= 4.2.0)
   rails_12factor
   redcarpet (= 3.2.2)
@@ -362,3 +364,6 @@ DEPENDENCIES
   unicorn
   web-console (= 2.1.1)
   will_paginate (~> 3.0.5)
+
+BUNDLED WITH
+   1.10.6
