@@ -90,6 +90,6 @@ Studiocracy::Application.configure do
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: ENV["SMTP_USER"],
-    password: ENV["SMTP_PWD"]
+    password: ENV["SMTP_PWD"],
   }
 end

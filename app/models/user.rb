@@ -32,9 +32,8 @@ devise :omniauthable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :trackable, :validatable
+  :recoverable, :rememberable, :trackable, :validatable, :confirmable
 # Confirmation email disabled due to timeout errors with our host
-# , :confirmable
   
   # Pagination
   paginates_per 100
@@ -46,7 +45,6 @@ devise :omniauthable
   validate :password_complexity
 
   def password_complexity
-    puts provider
     if (provider != "facebook")
       if not (password.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/) or password.match(/(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*\(\)_\+\|~\-=\\\'\{}\[\]:";<>\?,\.\/])/))
         errors.add :password, "must include at least one lowercase letter, one uppercase letter, and either a number or special symbol !@#\$%\^&\*\(\)_\+\|~\-=\\\'\{}\[\]:\";<>\?,\.\/"
@@ -104,8 +102,7 @@ devise :omniauthable
     #user.oauth_expires_at = Time.at(auth.credentials.expires_at)
     user.password = auth.uid
 
-    # TODO: Uncomment when email confirmation is working
-    # user.skip_confirmation!
+    user.skip_confirmation!
     user.save!
     end
   end

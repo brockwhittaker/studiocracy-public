@@ -7,8 +7,20 @@ class ConversationsController < ApplicationController
   def create
     recipients = User.where(id: conversation_params[:recipients])
     conversation = current_user.send_message(recipients, conversation_params[:body], conversation_params[:subject]).conversation
-    flash[:success] = "Your message was successfully sent!"
-    redirect_to conversation_path(conversation)
+
+    puts "Test output"
+    puts conversation_params
+
+    respond_to do |format|
+      if conversation
+        format.html { redirect_to(conversation_path(conversation)) }
+      else
+        format.html {
+          flash[:alert] = "Message couldn't be sent! You need to include a message."
+          redirect_to(mailbox_inbox_path)
+        }
+      end
+    end
   end
 
   def show
@@ -36,11 +48,11 @@ class ConversationsController < ApplicationController
   private
 
   def conversation_params
-    params.require(:conversation).permit(:subject, :body,recipients:[])
+    params.require(:conversation).permit(:subject, :body, :recipients)
   end
 
   def message_params
-    params.require(:message).permit(:body, :subject)
+    params.require(:message).permit(:body, :subject, :recipients)
   end
 
 end

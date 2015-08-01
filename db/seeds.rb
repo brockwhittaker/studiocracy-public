@@ -8,7 +8,7 @@ u = User.new(
     password_confirmation: "devPassword1",
     admin: true
 )
-# u.skip_confirmation!
+u.skip_confirmation!
 u.save!
 # generate user accounts
 (1..10).each do |i|
@@ -20,7 +20,7 @@ u.save!
 		last_name: "\##{i}",
     image: File.new('app/assets/images/default_icon.jpg')
 	)
-	# u.skip_confirmation!
+	u.skip_confirmation!
 	u.save!
 	print i, " user(s) created with id ", u.id, "\n"
 	# generate dummy posts

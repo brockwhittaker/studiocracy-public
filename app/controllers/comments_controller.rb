@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
      	  if @comment.save
   	    	flash[:success] = 'Success'
   	    	redirect_to post_path(Post.find(@comment.post_id))
-  	  end
+  	  	end
 	end
 
 	private
