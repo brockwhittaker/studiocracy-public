@@ -8,7 +8,7 @@ u = User.new(
     password_confirmation: "devPassword1",
     admin: true
 )
-# u.skip_confirmation!
+u.skip_confirmation!
 u.save!
 # generate user accounts
 (1..10).each do |i|
