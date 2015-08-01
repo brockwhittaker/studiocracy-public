@@ -3,7 +3,9 @@ class Post < ActiveRecord::Base
   # Markdown
   #before_save { MarkdownWriter.update_html(self) }
 
-  has_attached_file :image, styles: { small: "64x64", med: "300x300", large: "500x500" }
+  has_attached_file :image,
+                    styles: { small: "64x64", med: "300x300", large: "500x500" },
+                    :default_url => 'test.png'
 
   # Validations
   validates :title, presence: true, length: { maximum: 100 }

@@ -17,8 +17,7 @@ u.save!
     password: "Password1",
     password_confirmation: "Password1",
     first_name: "user",
-    last_name: "\##{i}",
-      image: open('http://i.imgur.com/vDo0IT9.png')
+    last_name: "\##{i}"
   )
   u.skip_confirmation!
   u.save!
@@ -36,8 +35,7 @@ u.save!
       measurement: 'in',
       weight_in_pounds: rand(22),
       price: (rand(1000000)) * (0.01),
-      quantity: rand(33),
-      image: open('http://i.imgur.com/vDo0IT9.png')
+      quantity: rand(33)
     )
     p.save!
     print i, "..."
