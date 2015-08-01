@@ -1,5 +1,6 @@
 <% if @conversation # or whatever condition you want to show a popup for %>
     window.location.href = "<%= conversation_path( @conversation ) %>";
 <% else %>
-    alert('Message could not be sent. Did you include a subject and body?');
+    alert("Test!");
+    toastr.warning('Message could not be sent. Did you include a subject and body?');
 <% end %>
