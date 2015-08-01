@@ -20,7 +20,7 @@ u.save!
     last_name: "\##{i}",
       image: open('http://i.imgur.com/vDo0IT9.png')
   )
-  # u.skip_confirmation!
+  u.skip_confirmation!
   u.save!
   print i, " user(s) created with id ", u.id, "\n"
   # generate dummy posts

@@ -6,21 +6,12 @@ class ConversationsController < ApplicationController
 
   def create
     recipients = User.where(id: conversation_params[:recipients])
-    conversation = current_user.send_message(recipients, conversation_params[:body], conversation_params[:subject]).conversation
-
-    puts "Test output"
-    puts conversation_params
+    @conversation = current_user.send_message(recipients, conversation_params[:body], conversation_params[:subject]).conversation
 
     respond_to do |format|
-      if conversation
-        format.html { redirect_to(conversation_path(conversation)) }
-      else
-        format.html {
-          flash[:alert] = "Message couldn't be sent! You need to include a message."
-          redirect_to(mailbox_inbox_path)
-        }
-      end
+      format.js
     end
+
   end
 
   def show
