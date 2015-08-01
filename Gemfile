@@ -63,18 +63,23 @@ gem 'devise', '3.4.1'
 gem 'redcarpet', '3.2.2'
 
 # Rails 12factor for Heroku: https://github.com/heroku/rails_12factor
-group :production do
-  gem 'rails_12factor'
-end
+gem 'rails_12factor', group: :production
 
 # PostgreSQL gem for Heroku
 group :production do
   gem 'pg'
 end
 
+# 
+
 # Unicorn: http://unicorn.bogomips.org
 group :production do
   gem 'unicorn'
+end
+
+# Puma:
+group :production do
+  gem 'puma'
 end
 
 #Paperclip - for multimedia uploads, esp. images
