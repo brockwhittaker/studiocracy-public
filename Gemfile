@@ -78,9 +78,7 @@ group :production do
 end
 
 # Puma:
-group :production do
-  gem 'puma'
-end
+gem 'puma'
 
 #Paperclip - for multimedia uploads, esp. images
 gem "paperclip", "~> 4.2"
