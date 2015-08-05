@@ -16,8 +16,6 @@ class Post < ActiveRecord::Base
 
   # Relations
   belongs_to :user
-  has_many :comments
-  has_many :post_votes
   has_many :tags
   accepts_nested_attributes_for :tags
 
@@ -35,9 +33,10 @@ class Post < ActiveRecord::Base
   attr_reader :votecount
 
   def votecount
+    1
     #Ranking algorithm:
     # (Upvotes/((minutes since posted + 2)^1.8)) - (Miniscule value to break ties between 0 upvote posts)
-    (((((post_votes.where(:state => 1).count))/((((Time.zone.now - created_at) / 60).round + 2) ** 1.8))) - ((Time.zone.now-created_at)/(157788000 ** 10)))
+    #(((((post_votes.where(:state => 1).count))/((((Time.zone.now - created_at) / 60).round + 2) ** 1.8))) - ((Time.zone.now-created_at)/(157788000 ** 10)))
   end
 
 

@@ -1,17 +1,10 @@
 Studiocracy::Application.routes.draw do
   root "pages#home"
   devise_for :users, :controllers => { omniauth_callbacks: "omniauth_callbacks", registrations: 'registrations' }
-
-  resources :posts, :has_many => [:comments, :post_votes]
-  resources :post_votes
-
-  resources :comments, :has_many =>[:comment_votes]
-  resource  :comment_votes
-
   resources :charges
-
   resources :users
-
+  resources :posts
+  
   # mailbox folder routes
   get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
   get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent
