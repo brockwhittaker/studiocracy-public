@@ -2,9 +2,9 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @post = Post.find(params[:id])
     @comment_hash = params[:comment]
-    @comment = Comment.build_from(@post, current_user.id, @comment_hash[:body])
+    @obj = @comment_hash[:commentable_type].constantize.find(@comment_hash[:commentable_id])
+    @comment = Comment.build_from(@obj, current_user.id, @comment_hash[:body])
     if @comment.save
       render :partial => "comments/comment", :locals => { :comment => @comment }, :layout => false, :status => :created
     else

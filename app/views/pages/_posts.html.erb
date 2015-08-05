@@ -44,7 +44,7 @@
 				  </div>
 				    <!-- Votes-->
 				    <div class='votes'>
-					    <%= post.get_likes.size - post.get_dislikes.size %>
+					    <%= post.netvotes %>
 					    <% if current_user && (current_user.voted_up_on? post) %>
 					      <%= link_to image_tag('upvote.png'), unlike_post_path(post), method: :put %>
 					    <% else %>

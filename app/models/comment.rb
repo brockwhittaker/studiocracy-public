@@ -45,4 +45,16 @@ class Comment < ActiveRecord::Base
   def self.find_commentable(commentable_str, commentable_id)
     commentable_str.constantize.find(commentable_id)
   end
+
+  attr_reader :votecount, :netvotes
+
+  def netvotes
+    get_likes.count - get_dislikes.count
+  end
+
+  def votecount
+    #Ranking algorithm:
+    # (Upvotes/((minutes since posted + 2)^1.8)) - (Miniscule value to break ties between 0 upvote posts)
+    (((((netvotes))/((((Time.zone.now - created_at) / 60).round + 2) ** 1.8))) - ((Time.zone.now-created_at)/(157788000 ** 10)))
+  end
 end
