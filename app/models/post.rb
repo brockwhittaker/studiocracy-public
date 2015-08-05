@@ -2,7 +2,9 @@ class Post < ActiveRecord::Base
 
   # Markdown
   #before_save { MarkdownWriter.update_html(self) }
-
+  acts_as_commentable
+  acts_as_votable
+  
   has_attached_file :image,
                     styles: { small: "64x64", med: "300x300", large: "500x500" },
                     :default_url => 'test.png'

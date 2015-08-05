@@ -3,8 +3,19 @@ Studiocracy::Application.routes.draw do
   devise_for :users, :controllers => { omniauth_callbacks: "omniauth_callbacks", registrations: 'registrations' }
   resources :charges
   resources :users
-  resources :posts
   
+  resources :posts do
+    member do
+      put "like", to: "votes#like"
+      put "unlike", to: "votes#unlike"
+      put "dislike", to: "votes#dislike"
+      put "undislike", to: "votes#undislike"
+    end
+  end
+
+  resources :comments
+
+
   # mailbox folder routes
   get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
   get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent

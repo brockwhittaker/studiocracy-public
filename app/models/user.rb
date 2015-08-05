@@ -5,7 +5,8 @@ devise :omniauthable
 
   #For Mailboxer private inboxes
   acts_as_messageable
-
+  acts_as_voter
+  
   def mailboxer_name
     self.fullname
   end
