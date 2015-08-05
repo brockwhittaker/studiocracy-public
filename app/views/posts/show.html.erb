@@ -200,7 +200,11 @@
 </div>
 
 <div class="comment row comments-section">
-  <%= render :partial => 'comments/form', :locals => { :comment => @new_comment } %>
+  <% if @current_user.present? %>
+    <%= render :partial => 'comments/form', :locals => { :comment => @new_comment } %>
+  <% else %>
+    <p>You must sign in to comment</p>
+  <% end %>
   <%= render :partial => 'comments/comment', :collection => @comments, :as => :comment %>
 </div>
 </div>

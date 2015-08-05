@@ -6,16 +6,21 @@ Studiocracy::Application.routes.draw do
   
   resources :posts do
     member do
-      put "like", to: "votes#like"
-      put "unlike", to: "votes#unlike"
-      put "dislike", to: "votes#dislike"
-      put "undislike", to: "votes#undislike"
+      put "like", to: "posts#like"
+      put "unlike", to: "posts#unlike"
     end
-    
   end
   
   resources :comments, :only => [:create, :destroy]
-  
+  resources :comments do
+    member do
+      put "like", to: "comments#like"
+      put "unlike", to: "comments#unlike"
+      put "dislike", to: "comments#dislike"
+      put "undislike", to: "comments#undislike"
+    end
+  end
+
   # mailbox folder routes
   get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
   get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent

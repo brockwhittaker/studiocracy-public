@@ -1,23 +1,56 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_filter :require_permission, only: :destroy
+
+  def like
+    @comment = Comment.find(params[:id])
+    @comment.liked_by current_user
+    redirect_to :back
+  end
+
+  def unlike
+    @comment = Comment.find(params[:id])
+    @comment.unliked_by current_user
+    redirect_to :back
+  end
+  
+  def dislike
+    @comment = Comment.find(params[:id])
+    @comment.disliked_by current_user
+    redirect_to :back
+  end
+
+  def undislike
+    @comment = Comment.find(params[:id])
+    @comment.undisliked_by current_user
+    redirect_to :back
+  end
+
+  def require_permission
+    if current_user != Comment.find(params[:id]).user
+      flash[:alert] = "that's not your comment"
+      redirect_to :back
+    end
+  end
 
   def create
     @comment_hash = params[:comment]
     @obj = @comment_hash[:commentable_type].constantize.find(@comment_hash[:commentable_id])
     @comment = Comment.build_from(@obj, current_user.id, @comment_hash[:body])
     if @comment.save
-      render :partial => "comments/comment", :locals => { :comment => @comment }, :layout => false, :status => :created
+      redirect_to :back, :notice => "comment saved"
     else
-      render :js => "alert('error saving comment');"
+      flash[:alert] = "unable to save comment"
+      redirect_to :back
     end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
     if @comment.destroy
-      render :json => @comment, :status => :ok
+      redirect_to :back, :notice => "comment deleted"
     else
-      render :js => "alert('error deleting comment');"
+      flash[:alert] = "error deleting comment"
     end
   end
 end
