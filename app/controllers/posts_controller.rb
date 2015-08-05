@@ -2,6 +2,8 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+        @comments = @post.comment_threads.sort_by {|comment| comment.votecount }.reverse
+        @new_comment = Comment.build_from(@event, current_user.id, "")
 	end
 
 	def new

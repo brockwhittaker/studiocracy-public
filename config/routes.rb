@@ -11,11 +11,11 @@ Studiocracy::Application.routes.draw do
       put "dislike", to: "votes#dislike"
       put "undislike", to: "votes#undislike"
     end
+    
   end
-
-  resources :comments
-
-
+  
+  resources :comments, :only => [:create, :destroy]
+  
   # mailbox folder routes
   get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
   get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent
