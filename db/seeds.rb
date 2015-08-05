@@ -1,6 +1,6 @@
 require "open-uri"
 
-print "---------- Generating Seed Data ----------"
+print "---------- Generating Seed Data ----------\n"
 # Temporary admin account
 u = User.new(
     email: "admin@example.com",
@@ -96,4 +96,4 @@ print "\nGenerating comment votes"
   end
 end
 
-print "\n\n---------- Seed Data Generated ----------\n"
+print "\n---------- Seed Data Generated ----------\n"

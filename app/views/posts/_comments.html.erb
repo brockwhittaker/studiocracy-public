@@ -18,7 +18,6 @@
       </div>
 
           <div class='ind-comment-parent' id='comment_<%= comment.id %>'>
-            <!--<p><%= image_tag(comment.image.url(:small)) %>-->
             <p class="post-by"> <!-- for when the other one is commented out -->
               <%= comment.fullname %> on <%= l(comment.created_at, format: '%B, %d %Y') %>
             </p>
@@ -26,7 +25,7 @@
             <blockquote>
               <p><%= comment.message %></p>
             </blockquote>
-            <button class="reply">reply</button>
+            <%= button_to "replizzle", comments_reply_path(comment), :class => '.btn-info', :remote => true %>
           </div>
           <div class="clear"></div>
       <% end %>

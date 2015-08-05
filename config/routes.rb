@@ -7,6 +7,7 @@ Studiocracy::Application.routes.draw do
 
   resources :comments, :has_many =>[:comment_votes]
   resource  :comment_votes
+  get "comments/reply" => "comments#reply", as: :comments_reply
 
   resources :charges
 

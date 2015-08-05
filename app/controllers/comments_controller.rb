@@ -1,6 +1,14 @@
 class CommentsController < ApplicationController
 	before_filter :authenticate_user!
 
+	def reply
+		@comment = Comment.find(params[:id])
+		respond_to do |format|
+			format.html
+			format.js
+		end
+	end
+
 	def index
 	  @comments = Comment.all
 	end
