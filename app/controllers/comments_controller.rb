@@ -26,6 +26,13 @@ class CommentsController < ApplicationController
     redirect_to :back
   end
 
+  def makereply
+    @parent = Comment.find(params[:id])
+    @child = params[:comment]
+    @child.move_to_child_of(@parent)
+  end
+
+
   def require_permission
     if current_user != Comment.find(params[:id]).user
       flash[:alert] = "that's not your comment"
