@@ -91,8 +91,9 @@ gem 'will_paginate', '~> 3.0.5'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'jquery-infinite-pages'
 
-# Nesting for comments
-gem 'closure_tree'
+# Threaded comments
+gem 'acts_as_commentable_with_threading'
+gem 'acts_as_votable'
 
 group :development, :test do
 gem 'foreman'

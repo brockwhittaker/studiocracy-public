@@ -1,0 +1,32 @@
+<div class="comment" id="comment-<%= comment.id %>">
+  <div class='votes'>
+    <% if current_user && %>
+      <% if current_user.voted_up_on? comment %>
+        <%= link_to '▲', unlike_comment_path(comment), :class => 'upvote', :id => "upvote-#{comment.id}", :method => :put %>
+        <div class='num_votes'><%= comment.netvotes %></div>
+        <%= link_to '▼', dislike_comment_path(comment), :class => 'nullvote', :id => "nullvote-#{comment.id}", :method=> :put %>
+      <% elsif current_user.voted_down_on? comment %>
+        <%= link_to '▲', like_comment_path(comment), :class => 'nullvote', :id => "nullvote-#{comment.id}", :method => :put %>
+        <div class='num_votes'><%= comment.netvotes %></div>
+        <%= link_to '▼', undislike_comment_path(comment), :class => 'downvote', :id => "downvote-#{comment.id}", :method => :put %>
+      <% end %>
+    <% else %>
+      <%= link_to '▲', like_comment_path(comment), :class => 'nullvote', :id => "nullvote-#{comment.id}", :method => :put %>
+      <div class='num_votes'><%= comment.netvotes %></div>
+      <%= link_to '▼', dislike_comment_path(comment), :class => 'nullvote', :id => "nullvote-#{comment.id}", :method => :put %>
+    <% end %>
+  </div>
+
+  <%= link_to "x", comment_path(comment),
+  :method => :delete, data: { :confirm => "Are you sure you want to remove this comment?" } %>
+
+  <p class="post-by"> <!-- for when the other one is commented out -->
+    <%= comment.user.fullname %> on <%= l(comment.created_at, format: '%B, %d %Y') %>
+  </p>
+
+  <blockquote>
+    <p><%= comment.body %></p>
+  </blockquote>
+
+  
+</div>

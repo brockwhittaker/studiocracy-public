@@ -5,7 +5,8 @@ devise :omniauthable
 
   #For Mailboxer private inboxes
   acts_as_messageable
-
+  acts_as_voter
+  
   def mailboxer_name
     self.fullname
   end
@@ -16,9 +17,6 @@ devise :omniauthable
   
   # Relations
   has_many :posts
-  has_many :comments
-  has_many :post_votes
-  has_many :comment_votes
 
   has_attached_file :image,
                     styles: { small: "64x64", med: "300x300", large: "500x500" },

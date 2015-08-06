@@ -43,7 +43,7 @@ u.save!
   print " posts created!\n"
 end
 
-
+=begin
 # generate dummy comments
 print "\nGenerating comments"
 (1..500).each do |i|
@@ -95,5 +95,5 @@ print "\nGenerating comment votes"
     end
   end
 end
-
-print "\n---------- Seed Data Generated ----------\n"
+=end
+print "\n\nDone!\n\n"
