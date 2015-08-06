@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
     redirect_to :back
   end
 
-  def makereply
+  def childify
     @parent = Comment.find(params[:id])
     @child = params[:comment]
     @child.move_to_child_of(@parent)

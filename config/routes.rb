@@ -19,6 +19,7 @@ Studiocracy::Application.routes.draw do
       put "unlike", to: "comments#unlike"
       put "dislike", to: "comments#dislike"
       put "undislike", to: "comments#undislike"
+      put "childify", to: "comments#childify"
     end
   end
 
