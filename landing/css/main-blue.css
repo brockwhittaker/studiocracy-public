@@ -1254,17 +1254,19 @@ header p{
 }
 
 #popup-signin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
   background-color: rgba(42,69,90,0.7);
-  z-index: 100;
+  z-index: 10;
 }
 
 #mc_embed_signup {
-  margin: calc((100vh - 500px) / 2) auto;
   width: 500px;
   padding: 20px;
   border-radius: 4px;
@@ -1272,4 +1274,16 @@ header p{
 
 #mc_embed_signup label {
   margin-left: 5px;
+}
+
+@media screen and (orientation: portrait) {
+  #mc_embed_signup {
+    width: 90vw;
+  }
+}
+
+@media screen and (max-width: 700px) and (orientation: landscape) {
+  #mc_embed_signup {
+    zoom: 0.5;
+  }
 }
