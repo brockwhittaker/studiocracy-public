@@ -1,12 +1,22 @@
 class User < ActiveRecord::Base
 
 devise :omniauthable
+
+
+  #For Mailboxer private inboxes
+  acts_as_messageable
+  acts_as_voter
+  
+  def mailboxer_name
+    self.fullname
+  end
+
+  def mailboxer_email(object)
+    self.email
+  end
   
   # Relations
   has_many :posts
-  has_many :comments
-  has_many :post_votes
-  has_many :comment_votes
 
   has_attached_file :image,
                     styles: { small: "64x64", med: "300x300", large: "500x500" },
@@ -20,9 +30,8 @@ devise :omniauthable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :trackable, :validatable
+  :recoverable, :rememberable, :trackable, :validatable, :confirmable
 # Confirmation email disabled due to timeout errors with our host
-# , :confirmable
   
   # Pagination
   paginates_per 100
@@ -30,6 +39,16 @@ devise :omniauthable
   # Validations
   # :email
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  # :password
+  validate :password_complexity
+
+  def password_complexity
+    if (provider != "facebook")
+      if not (password.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/) or password.match(/(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*\(\)_\+\|~\-=\\\'\{}\[\]:";<>\?,\.\/])/))
+        errors.add :password, "must include at least one lowercase letter, one uppercase letter, and either a number or special symbol !@#\$%\^&\*\(\)_\+\|~\-=\\\'\{}\[\]:\";<>\?,\.\/"
+      end
+    end
+  end
 
   def self.paged(page_number)
     order(admin: :desc, email: :asc).page page_number
@@ -64,7 +83,7 @@ devise :omniauthable
 
   def self.from_omniauth(auth)
   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    #user.provider = auth.provider
+    user.provider = auth.provider
     #user.uid = auth.uid
     user.first_name = auth.info.first_name
     user.last_name = auth.info.last_name
@@ -74,10 +93,13 @@ devise :omniauthable
 
     #user.image = auth.info.image
     user.email = auth.info.email
+    user.password= "test123Ah!"
+    user.save!
     #user.bio = auth.info.extra.raw_info.bio
     #user.oauth_token = auth.credentials.token
     #user.oauth_expires_at = Time.at(auth.credentials.expires_at)
     user.password = auth.uid
+
     user.skip_confirmation!
     user.save!
     end

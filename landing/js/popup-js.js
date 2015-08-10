@@ -2,7 +2,7 @@
  * Created by brockwhittaker on 7/16/15.
  */
 
-$("#get-access").click(function () {
+$(".get-access").click(function () {
     $("#popup-signin").fadeIn(500);
     popUpVisibile = true;
 });

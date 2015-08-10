@@ -45,6 +45,7 @@ have a fixed width and height (but it's not required).
   -moz-box-shadow: 0 0 2px #999;
   box-shadow: 0 0 2px #999;
   background-color:white;
+  height: 285px;
 }
 
 /** Carousel **/
@@ -113,7 +114,7 @@ have a fixed width and height (but it's not required).
 
 .jcarousel-pagination {
   position: absolute;
-  bottom: -40px;
+  bottom: -0.5px;
   left: 50%;
   -webkit-transform: translate(-50%, 0);
   -ms-transform: translate(-50%, 0);

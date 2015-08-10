@@ -6,11 +6,14 @@ gem 'rails', '4.2.0'
 gem 'sass-rails', '5.0.1'
 gem 'uglifier', '2.7.1'
 gem 'coffee-rails', '4.1.0'
-gem 'jquery-rails', '4.0.3'
+gem 'jquery-rails', '4.0.4'
 gem 'turbolinks', '2.5.3'
 gem 'jquery-turbolinks'
 gem 'jbuilder', '2.2.11'
 gem 'bcrypt', '3.1.10'
+
+# Required for testing
+gem 'rspec'
 
 # Necessary for Windows OS (won't install on *nix systems)
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
@@ -60,19 +63,22 @@ gem 'devise', '3.4.1'
 gem 'redcarpet', '3.2.2'
 
 # Rails 12factor for Heroku: https://github.com/heroku/rails_12factor
-group :production do
-  gem 'rails_12factor'
-end
+gem 'rails_12factor', group: :production
 
 # PostgreSQL gem for Heroku
 group :production do
   gem 'pg'
 end
 
+# 
+
 # Unicorn: http://unicorn.bogomips.org
 group :production do
   gem 'unicorn'
 end
+
+# Puma:
+gem 'puma'
 
 #Paperclip - for multimedia uploads, esp. images
 gem "paperclip", "~> 4.2"
@@ -85,17 +91,16 @@ gem 'will_paginate', '~> 3.0.5'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'jquery-infinite-pages'
 
-# Nesting for comments
-gem 'closure_tree'
-
-# Solr search engine
-gem 'sunspot_rails'
-
-group :development do
-  gem 'sunspot_solr'
-end
-
+# Threaded comments
+gem 'acts_as_commentable_with_threading'
+gem 'acts_as_votable'
 
 group :development, :test do
 gem 'foreman'
 end
+
+#mailboxer for private inboxes
+gem 'mailboxer'
+
+# jQuery plug-in for selecting from lists
+gem 'chosen-rails'

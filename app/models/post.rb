@@ -2,14 +2,12 @@ class Post < ActiveRecord::Base
 
   # Markdown
   #before_save { MarkdownWriter.update_html(self) }
-
-  #solr search engine
-  searchable do
-    text      :title, :content_md
-    string    :medium
-  end
-
-  has_attached_file :image, styles: { small: "64x64", med: "300x300", large: "500x500" }
+  acts_as_commentable
+  acts_as_votable
+  
+  has_attached_file :image,
+                    styles: { small: "64x64", med: "300x300", large: "500x500" },
+                    :default_url => 'test.png'
 
   # Validations
   validates :title, presence: true, length: { maximum: 100 }
@@ -20,8 +18,6 @@ class Post < ActiveRecord::Base
 
   # Relations
   belongs_to :user
-  has_many :comments
-  has_many :post_votes
   has_many :tags
   accepts_nested_attributes_for :tags
 
@@ -36,12 +32,16 @@ class Post < ActiveRecord::Base
     .order("updated_at DESC")
   }
 
-  attr_reader :votecount
+  attr_reader :votecount, :netvotes
+
+  def netvotes
+    get_likes.count - get_dislikes.count
+  end
 
   def votecount
     #Ranking algorithm:
     # (Upvotes/((minutes since posted + 2)^1.8)) - (Miniscule value to break ties between 0 upvote posts)
-    (((((post_votes.where(:state => 1).count))/((((Time.zone.now - created_at) / 60).round + 2) ** 1.8))) - ((Time.zone.now-created_at)/(157788000 ** 10)))
+    (((((netvotes))/((((Time.zone.now - created_at) / 60).round + 2) ** 1.8))) - ((Time.zone.now-created_at)/(157788000 ** 10)))
   end
 
 

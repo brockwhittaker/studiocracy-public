@@ -7,3 +7,7 @@
 /.secret
 /config/database.yml
 app/assets/javascripts/ajax_voting.js
+/vendor/cache
+.env
+/.elasticbeanstalk
+/.elasticbeanstalk

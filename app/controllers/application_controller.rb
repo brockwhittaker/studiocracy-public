@@ -5,29 +5,39 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :reject_locked!, if: :devise_controller?
-
+  after_filter :store_location
 
   # Devise permitted params
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(
-      :email,
-      :password,
-      :password_confirmation)
+        :email,
+        :password,
+        :password_confirmation)
     }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(
-      :email,
-      :password,
-      :password_confirmation,
-      :current_password
-      )
+        :email,
+        :password,
+        :password_confirmation,
+        :current_password
+    )
     }
+  end
+
+  #for use in redirecting upon successful login
+  def store_location
+    return unless request.get?
+    #save sites not on this exclusion list
+    if (request.path != "/users/sign_in" &&
+        request.path != "/users/sign_up" &&
+        request.path != "/users/password/new" &&
+        request.path != "/users/edit")
+      session[:previous_url] = request.fullpath
+    end
   end
 
   # Redirects on successful sign in
   def after_sign_in_path_for(resource)
-    #redirect_to(:back)
-    #redirect_to(request.env['HTTP_REFERER'])
-    root_url
+    session[:previous_url] || root_path
   end
 
   # Auto-sign out locked users
@@ -52,5 +62,18 @@ class ApplicationController < ActionController::Base
     end
   end
   helper_method :require_admin!
+
+  #helper method for mailboxer
+  helper_method :mailbox, :conversation
+
+  private
+
+  def mailbox
+    @mailbox ||= current_user.mailbox
+  end
+
+  def conversation
+    @conversation ||= mailbox.conversations.find(params[:id])
+  end
 
 end

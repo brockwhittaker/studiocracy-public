@@ -1,7 +1,7 @@
 $pink: #e21760;
 $blue: #22adc2;
 
-.post-header h3, .post-header h4{
+.post-header h3, .post-header h4, .post-header a{
   color: $pink;
   margin:0px 0px 0px 0px;
 }
@@ -24,6 +24,13 @@ $blue: #22adc2;
 .post-show-head{
   margin: 17px 0 17px 0;
  }
+
+.post-show-head a{
+  font-family: "Montserrat", "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  color: white;
+}
 
 .post-data{
   color: $blue;

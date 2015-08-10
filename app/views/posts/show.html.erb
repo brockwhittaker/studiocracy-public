@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-sm-6">
-    <h4 class="letter-spaced post-show-head"><%= @post.user.fullname.upcase %>
+    <h4 class="letter-spaced post-show-head">
+      // <%= link_to @post.user.fullname.upcase, user_path(@post.user) %>
       <% if @post.user.city != nil && @post.user.state != nil %>
           // <%= @post.user.city.upcase %>, <%= @post.user.state.upcase %>
       <% end %>
@@ -12,32 +13,29 @@
   <div class="col-md-8 col-sm-12">
     <div id="gallery" style="display:none;">
 
-      <img alt="Image 1 Title" src=<%= @post.image.url(:large) %>
-              data-image= <%= @post.image.url(:large) %>
+      <img alt="Image 1 Title" src=<%= @post.image.url %>
+              data-image= <%= @post.image.url %>
            data-description=<%= @post.content_md %>>
     </div>
 
-
-    <script type="text/javascript">
-        jQuery(document).ready(function () {
-            jQuery("#gallery").unitegallery();
-        });
-    </script>
   </div>
 
   <div class="col-md-4 col-sm-12 post-header">
     <h3><%= @post.title.upcase %></h3>
     <!--<%=image_tag(@post.image.url(:small)) %> PUT USER PIC HERE -->
-    <h4 class="open-sans"><%= @post.user.fullname %></h4><br/>
+    <h4 class="open-sans">
+      <%= link_to @post.user.fullname, user_path(@post.user) %>
+    </h4>
+    <br/>
 
     <!-- Insert icons -->
     <div class="row icons-row">
-      <div class='votes post-votes'>
-        <%= @post.post_votes.where(:state => 1).count %>
-        <% if current_user && current_user.post_votes.where(:post_id => @post.id, :state => 1).present? %>
-            <%= link_to image_tag('upvote.png'), post_votes_path(:post_vote => {:post_id => @post.id, :state => 0}), :method => :post %>
+      <div class='votes'>
+        <%= @post.get_likes.size - @post.get_dislikes.size %>
+        <% if current_user && (current_user.voted_up_on? @post) %>
+          <%= link_to image_tag('upvote.png'), unlike_post_path(@post), method: :put %>
         <% else %>
-            <%= link_to image_tag('icons/grey_triangle.png'), post_votes_path(:post_vote => {:post_id => @post.id, :state => 1}), :method => :post %>
+          <%= link_to image_tag('icons/grey_triangle.png'), like_post_path(@post), method: :put %>
         <% end %>
       </div>
     </div>
@@ -72,13 +70,25 @@
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title" id="myModalLabel">Contact <span class="pink"><%= @post.user.fullname %></span></h4>
                 </div>
+                <%= form_for :conversation, url: :conversations, format: :js,  html: { class: "conversation-form" }, remote: true do |f| %>
                 <div class="modal-body">
-                  <textarea class="contact-message"></textarea>
+                      <div class="form-group">
+                        <%= f.hidden_field :recipients, :value => @post.user %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :subject %>
+                        <%= f.text_field :subject, placeholder: "Subject", class: "form-control" %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :message %>
+                        <%= f.text_area :body, class: 'form-control',placeholder: "Type your message here", rows: 4  %>
+                      </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Send</button>
+                  <%= f.submit "Send", class: "btn btn-primary" %>
                 </div>
+                  <% end %>
               </div>
             </div>
           </div>
@@ -190,30 +200,11 @@
 </div>
 
 <div class="comment row comments-section">
-  <%= form_for(@comment) do |f| %>
-      <% if @comment.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-            <ul>
-              <% @comment.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
-      <% end %>
-
-      <h2>Comments:</h2>
-
-      <div class="field">
-        <%= f.text_area :message, :placeholder => "Add a comment" %>
-        <%= f.hidden_field :post_id, value: @post.id %>
-      </div>
-      <div class="actions">
-        <%= f.submit %>
-      </div>
+  <% if @current_user.present? %>
+    <%= render :partial => 'comments/form', :locals => { :comment => @new_comment } %>
+  <% else %>
+    <p>You must sign in to comment</p>
   <% end %>
-  <div>
-    <%= render :partial => 'comments', :object => @comments %>
-  </div>
+  <%= render :partial => 'comments/comment', :collection => @comments, :as => :comment %>
 </div>
 </div>

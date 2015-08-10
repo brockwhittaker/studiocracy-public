@@ -1,6 +1,7 @@
 /*
- * Overwritten by RailsBricks
  *
+ *
+ *= require chosen
  *= require_self
  */
 @import "railsbricks_custom";
@@ -12,4 +13,6 @@
 @import "searchbar";
 @import "tagit/jquery.tagit";
 @import "tagit/tagit.ui-zendesk";
-@import "comments"
+@import "comments";
+@import "conversations/conversations";
+@import "toastr.min"

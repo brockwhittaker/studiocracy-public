@@ -13,7 +13,6 @@ function initPage() {
 
     (function ($) {
         'use strict';
-        console.log("test");
 
         var jCarousel = $.jCarousel = {};
 

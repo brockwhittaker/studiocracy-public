@@ -1,9 +1,8 @@
 <form class="navbar-form navbar-left" role="search">
   <div class="form-group search-group">
-
-    <%= form_tag posts_path, :method => :get do %>
-          <%= text_field_tag :search, params[:search], class: "letter-spaced search-box", placeholder: "SEARCH" %>
-          <%= image_submit_tag('icons/magnifying_glass.png', name: nil, class:"search-button") %>
-    <% end %>
+    <input type="text" class="letter-spaced search-box" placeholder="SEARCH">
+    <button type="submit" class="search-button">
+      <%= image_tag('icons/magnifying_glass.png') %>
+    </button>
   </div>
 </form>

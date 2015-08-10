@@ -1,15 +1,23 @@
 class PostsController < ApplicationController
+	before_action :authenticate_user!, except: [:show]
+	def like
+		@post = Post.find(params[:id])
+		@post.liked_by current_user
+		redirect_to :back
+	end
 
-	def index
-		@search = Post.search do
-			fulltext params[:search]
-		end
-		@posts = @search.results
+	def unlike
+		@post = Post.find(params[:id])
+		@post.unliked_by current_user
+		redirect_to :back
 	end
 
 	def show
 		@post = Post.find(params[:id])
-		@comment = Comment.new
+        @comments = @post.comment_threads.sort_by {|comment| comment.votecount }.reverse
+        if current_user
+        	@new_comment = Comment.build_from(@post, current_user.id, "")
+        end
 	end
 
 	def new

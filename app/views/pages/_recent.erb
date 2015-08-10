@@ -19,7 +19,7 @@
             <!-- Title -->
             <h3><%= link_to post.title, post_path(post), class: 'post_title' %></h3>
             <!-- Creator -->
-            <%= link_to post.user.fullname, post_path(post), class: 'artist_name' %>
+            <%= link_to post.user.fullname, user_path(post.user), class: 'artist_name' %>
             <br/><br/>
             <%= number_to_currency(post.price, :unit => "$") %>
           </div>

@@ -1,16 +1,40 @@
 Studiocracy::Application.routes.draw do
   root "pages#home"
   devise_for :users, :controllers => { omniauth_callbacks: "omniauth_callbacks", registrations: 'registrations' }
-
-  resources :posts, :has_many => [:comments, :post_votes]
-  resources :post_votes
-
-  resources :comments, :has_many =>[:comment_votes]
-  resource  :comment_votes
-
+  get "comments/reply" => "comments#reply", as: :comments_reply
   resources :charges
-
   resources :users
+  
+  resources :posts do
+    member do
+      put "like", to: "posts#like"
+      put "unlike", to: "posts#unlike"
+    end
+  end
+  
+  resources :comments, :only => [:create, :destroy]
+  resources :comments do
+    member do
+      put "like", to: "comments#like"
+      put "unlike", to: "comments#unlike"
+      put "dislike", to: "comments#dislike"
+      put "undislike", to: "comments#undislike"
+      put "childify", to: "comments#childify"
+    end
+  end
+
+  # mailbox folder routes
+  get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
+  get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent
+  get "mailbox/trash" => "mailbox#trash", as: :mailbox_trash
+
+  resources :conversations do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+    end
+  end
 
   get "home", to: "pages#home", as: "home"
   get "inside", to: "pages#inside", as: "inside"
@@ -20,6 +44,16 @@ Studiocracy::Application.routes.draw do
   get "/terms", to: "pages#terms", as: "terms"
   get "/our_team", to: "pages#our_team", as: "our_team"
   post "/emailconfirmation", to: "pages#email", as: "email_confirmation"
+
+  # Studiocracy API
+  namespace :api do
+    namespace :posts do
+      resources :posts
+    end
+    namespace :users do
+      resources :users
+    end
+  end
 
   namespace :admin do
     resources :posts
