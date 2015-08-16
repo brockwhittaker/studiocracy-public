@@ -1287,3 +1287,15 @@ header p{
     zoom: 0.5;
   }
 }
+
+.modal-body label {
+  color: #000;
+}
+
+#post-response {
+  color: #000;
+}
+
+input {
+  color: #000;
+}

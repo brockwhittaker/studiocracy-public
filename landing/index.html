@@ -353,13 +353,13 @@
    Send Message
 ============================== -->
 <section id="send-message" class="send-message main-bg white-color text-center">
-<!--     <a href="#" data-toggle="modal" data-target="#contact-form">
+    <div href="#" data-toggle="modal" data-target="#contact-form">
         <div class="send-icon">
             <i class="fa fa-paper-plane"></i>
         </div>
         <p class="light-text">Any <span class="bold-text">questions</span>? Send a <span
                 class="bold-text">message</span>.</p>
-    </a> -->
+    </div>
 
     <!-- Contact Form Modal -->
     <div class="modal fade contact-form" id="contact-form" tabindex="-1" role="dialog" aria-labelledby="contact-form"
@@ -370,7 +370,6 @@
                     <span aria-hidden="true">×</span>
                 </button>
                 <div class="modal-body">
-                    <form class="contact_form" name="contactform" method="post" action="http://www.studiocracy.com/public_html/php/mailer.php">
                         <table>
                             <tr>
                                 <td valign="top">
@@ -381,7 +380,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td valign="top"
+                                <td valign="top">
                                 <label for="last_name">Last Name *</label>
                                 </td>
                                 <td valign="top">
@@ -421,15 +420,14 @@
 
                                 <td valign="top">
 
-                                    <a id ="submit-comments" href="mailer.php">Email Form</a>
+                                    <div id ="submit-comments" style="color: black">Email Form</div>
 
                                 </td>
 
                             </tr>
 
                         </table>
-
-                    </form>
+                    <div id="post-response"></div>
                     <!-- *****  Contact form ***** -->
                 </div>
             </div>
